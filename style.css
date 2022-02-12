@@ -1,0 +1,86 @@
+html {
+  font-size: 10px;
+  background-color: #fee140;
+  background-image: linear-gradient(90deg, #fee140 0%, #fa709a 100%);
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.keys {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 3rem;
+}
+
+.key {
+  border-radius: 15px;
+  font-size: 1.5rem;
+  transition: all 0.09s ease;
+  text-align: center;
+  color: black;
+  text-shadow: 0 0 0.5rem black;
+  padding: 1em;
+  background: white;
+  min-width: 5em;
+  flex: 1;
+  margin: 0.5em;
+}
+body > div > div:nth-child(9) {
+  flex: 2;
+}
+.playing {
+  transform: scale(1.1);
+  border-color: #8f0000;
+  box-shadow: 0 0 1rem #8f0000;
+}
+
+kbd {
+  display: block;
+  font-size: 4rem;
+}
+
+.sound {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  color: #8f0000;
+}
+
+.hidden {
+  display: none;
+}
+
+@media screen and (min-width: 350px) {
+  .keys {
+    min-height: 90vh;
+  }
+  .key {
+    min-width: 7em;
+  }
+}
+@media screen and (min-width: 450px) {
+  .key {
+    min-width: 10em;
+  }
+}
+@media screen and (min-width: 585px) {
+  .key {
+    min-width: 15em;
+  }
+}
+@media screen and (min-width: 810px) {
+  body > div > div:nth-child(9) {
+    flex: 1;
+  }
+  .key:not(:last-of-type) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

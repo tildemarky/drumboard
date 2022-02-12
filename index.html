@@ -1,0 +1,100 @@
+<!DOCTYPE html> <!--[if gt IE 8]><!-->
+<html lang="en" class="no-js">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Drum Board</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="keys">
+      <div data-key="65" class="key" onclick="clickPlayFile(65)">
+        <kbd>A</kbd>
+        <span class="sound">clap</span>
+      </div>
+      <div data-key="83" class="key" onclick="clickPlayFile(83)">
+        <kbd>S</kbd>
+        <span class="sound">hihat</span>
+      </div>
+      <div data-key="68" class="key" onclick="clickPlayFile(68)">
+        <kbd>D</kbd>
+        <span class="sound">kick</span>
+      </div>
+      <div data-key="70" class="key" onclick="clickPlayFile(70)">
+        <kbd>F</kbd>
+        <span class="sound">openhat</span>
+      </div>
+      <div data-key="71" class="key" onclick="clickPlayFile(71)">
+        <kbd>G</kbd>
+        <span class="sound">boom</span>
+      </div>
+      <div data-key="72" class="key" onclick="clickPlayFile(72)">
+        <kbd>H</kbd>
+        <span class="sound">ride</span>
+      </div>
+      <div data-key="74" class="key" onclick="clickPlayFile(74)">
+        <kbd>J</kbd>
+        <span class="sound">snare</span>
+      </div>
+      <div data-key="75" class="key" onclick="clickPlayFile(75)">
+        <kbd>K</kbd>
+        <span class="sound">tom</span>
+      </div>
+      <div data-key="76" class="key" onclick="clickPlayFile(76)">
+        <kbd>L</kbd>
+        <span class="sound">tink</span>
+      </div>
+      <div data-key="48" class="key hidden">
+        <kbd>0</kbd>
+        <span class="sound">OOP</span>
+      </div>
+    </div>
+
+    <audio data-key="65" src="sounds/clap.wav"></audio>
+    <audio data-key="83" src="sounds/hihat.wav"></audio>
+    <audio data-key="68" src="sounds/kick.wav"></audio>
+    <audio data-key="70" src="sounds/openhat.wav"></audio>
+    <audio data-key="71" src="sounds/boom.wav"></audio>
+    <audio data-key="72" src="sounds/ride.wav"></audio>
+    <audio data-key="74" src="sounds/snare.wav"></audio>
+    <audio data-key="75" src="sounds/tom.wav"></audio>
+    <audio data-key="76" src="sounds/tink.wav"></audio>
+    <audio data-key="48" src="sounds/oop.mp3"></audio>
+
+    <script async defer>
+      function clickPlayFile(n) {
+        let audio = document.querySelector(`audio[data-key='${n}']`);
+        document.querySelector(`[data-key='${n}']`).classList.toggle('playing');
+        audio.play();
+        audio.currentTime = 0;
+      }
+      function removeTransition(ev) {
+        if (ev.propertyName !== 'transform') return;
+        this.classList.remove('playing');
+      }
+      const keys = document.querySelectorAll('.key');
+      keys.forEach(keys =>
+        keys.addEventListener('transitionend', removeTransition)
+      );
+      document.addEventListener('keydown', ev => {
+        let dataKey = document.querySelector(`[data-key='${ev.keyCode}']`);
+        let audioFile = document.querySelector(
+          `audio[data-key='${ev.keyCode}']`
+        );
+        function playFile(ev) {
+          dataKey.classList.toggle('playing');
+          audioFile.play();
+          audioFile.currentTime = 0;
+        }
+        if (dataKey) {
+          playFile();
+        } else {
+          console.warn('Oopsie, wrong button pressed');
+        }
+      });
+    </script>
+  </body>
+</html>
