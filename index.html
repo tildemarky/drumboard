@@ -7,50 +7,52 @@
     <title>Drum Board</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div class="keys">
-      <div data-key="65" class="key" onclick="clickPlayFile(65)">
-        <kbd>A</kbd>
+    <section class="grid">
+      <div data-key="87" class="w key" onclick="clickPlayFile(65)">
+        <kbd>W</kbd>
         <span class="sound">clap</span>
       </div>
-      <div data-key="83" class="key" onclick="clickPlayFile(83)">
-        <kbd>S</kbd>
+      <div data-key="65" class="a key" onclick="clickPlayFile(83)">
+        <kbd>A</kbd>
         <span class="sound">hihat</span>
       </div>
-      <div data-key="68" class="key" onclick="clickPlayFile(68)">
-        <kbd>D</kbd>
+      <div data-key="83" class="s key" onclick="clickPlayFile(68)">
+        <kbd>S</kbd>
         <span class="sound">kick</span>
       </div>
-      <div data-key="70" class="key" onclick="clickPlayFile(70)">
-        <kbd>F</kbd>
+      <div data-key="68" class="d key" onclick="clickPlayFile(70)">
+        <kbd>D</kbd>
         <span class="sound">openhat</span>
       </div>
-      <div data-key="71" class="key" onclick="clickPlayFile(71)">
-        <kbd>G</kbd>
+      <div class="spacer"></div>
+      <div data-key="73" class="i key" onclick="clickPlayFile(71)">
+        <kbd>I</kbd>
         <span class="sound">boom</span>
       </div>
-      <div data-key="72" class="key" onclick="clickPlayFile(72)">
-        <kbd>H</kbd>
+      <div data-key="74" class="j key" onclick="clickPlayFile(72)">
+        <kbd>J</kbd>
         <span class="sound">ride</span>
       </div>
-      <div data-key="74" class="key" onclick="clickPlayFile(74)">
-        <kbd>J</kbd>
+      <div data-key="75" class="k key" onclick="clickPlayFile(74)">
+        <kbd>K</kbd>
         <span class="sound">snare</span>
       </div>
-      <div data-key="75" class="key" onclick="clickPlayFile(75)">
-        <kbd>K</kbd>
+      <div data-key="76" class="l key" onclick="clickPlayFile(75)">
+        <kbd>L</kbd>
         <span class="sound">tom</span>
       </div>
-      <div data-key="76" class="key" onclick="clickPlayFile(76)">
-        <kbd>L</kbd>
+      <div data-key="32" class="spacebar key" onclick="clickPlayFile(76)">
+        <kbd>SPACE</kbd>
         <span class="sound">tink</span>
       </div>
-      <div data-key="48" class="key hidden">
-        <kbd>0</kbd>
-        <span class="sound">OOP</span>
-      </div>
+    </section>
+
+    <div data-key="48" class="key hidden">
+      <kbd>0</kbd>
+      <span class="sound">OOP</span>
     </div>
 
     <audio data-key="65" src="sounds/clap.wav"></audio>
@@ -67,32 +69,32 @@
     <script async defer>
       function clickPlayFile(n) {
         let audio = document.querySelector(`audio[data-key='${n}']`);
-        document.querySelector(`[data-key='${n}']`).classList.toggle('playing');
+        document.querySelector(`[data-key='${n}']`).classList.toggle("playing");
         audio.play();
         audio.currentTime = 0;
       }
       function removeTransition(ev) {
-        if (ev.propertyName !== 'transform') return;
-        this.classList.remove('playing');
+        if (ev.propertyName !== "transform") return;
+        this.classList.remove("playing");
       }
-      const keys = document.querySelectorAll('.key');
-      keys.forEach(keys =>
-        keys.addEventListener('transitionend', removeTransition)
+      const keys = document.querySelectorAll(".key");
+      keys.forEach((keys) =>
+        keys.addEventListener("transitionend", removeTransition)
       );
-      document.addEventListener('keydown', ev => {
+      document.addEventListener("keydown", (ev) => {
         let dataKey = document.querySelector(`[data-key='${ev.keyCode}']`);
         let audioFile = document.querySelector(
           `audio[data-key='${ev.keyCode}']`
         );
         function playFile(ev) {
-          dataKey.classList.toggle('playing');
+          dataKey.classList.toggle("playing");
           audioFile.play();
           audioFile.currentTime = 0;
         }
         if (dataKey) {
           playFile();
         } else {
-          console.warn('Oopsie, wrong button pressed');
+          console.warn("Oopsie, wrong button pressed");
         }
       });
     </script>
